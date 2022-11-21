@@ -8,4 +8,3 @@ systemctl restart mysqld
 
 #grep temp /var/log/mysqld.log
 #mysql_secure_installation
-
