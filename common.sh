@@ -12,4 +12,4 @@ PRINT() {
 }
 
 LOG=/tmp/$COMPONENT.log
-rm -f* $LOG
+rm -f $LOG
