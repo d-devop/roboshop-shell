@@ -46,7 +46,7 @@ APP_LOC=/tmp
 CONTENT=mysql-main
 DOWNLOAD_APP_CODE
 
-cd mongodb-main &>>$LOG
+cd mysql-main &>>$LOG
 
 PRINT "Load Shipping Schema"
 mysql -uroot -p{ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>$LOG
