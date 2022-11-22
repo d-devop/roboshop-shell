@@ -5,7 +5,7 @@ PRINT "Install NodeJS Repos"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
 STAT $?
 
-PRINT Install NodeJS
+PRINT "Install NodeJS"
 yum install nodejs -y &>>$LOG
 STAT $?
 
