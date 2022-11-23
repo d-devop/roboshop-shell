@@ -8,7 +8,7 @@ SG_NAME="allow-all"
 
 env=dev
 
-create ec2(){
+create_ec2(){
   PRIVATE_IP=$(aws ec2 run-instances \
       --image-id ${AMI ID} \
       --instance-type t3.micro \
