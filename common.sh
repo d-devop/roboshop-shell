@@ -45,16 +45,8 @@ SYSTEMD_SETUP(){
     sed -i -e 's/REDIS_ENDPOINT/redis.devopsb69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devopsb69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
     STAT $?
 
-    PRINT "Reload SystemD"
-    systemctl daemon-reload &>>$LOG
-    STAT $?
-
     PRINT "Restart ${COMPONENT}"
-    systemctl restart ${COMPONENT} &>>$LOG
-    STAT $?
-
-    PRINT "Enable ${COMPONENT} Service"
-    systemctl enable ${COMPONENT} &>>$LOG
+    systemctl daemon-reload &>>$LOG && systemctl restart ${COMPONENT} &>>$LOG && systemctl enable ${COMPONENT} &>>$LOG
     STAT $?
 }
 
@@ -90,11 +82,15 @@ JAVA(){
  PRINT "Install Maven"
  yum install maven -y &>>$LOG
  STAT $?
+
  DOWNLOAD_APP_CODE
 
- PRINT "Download Maven Dependencies"
- mvn clean package &>>$LOG && mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LOG
- STAT $?
+  mv ${COMPONENT}-main ${COMPONENT}
+  cd ${COMPONENT}
+
+  PRINT "Download Maven Dependencies"
+  mvn clean package &>>$LOG && mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LOG
+  STAT $?
 
  SYSTEMD_SETUP
 }
